@@ -1,7 +1,6 @@
 /* This is the data we will be using to create our article components */
 /* Look over this data, then proceed to line 91*/
-const data = [
-  {
+const data = [{
     title: 'Lambda School Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
     firstParagraph: `Lucas ipsum dolor sit amet ben twi'lek padmé darth darth darth moff hutt organa twi'lek. Ben amidala secura skywalker lando
@@ -85,6 +84,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Extremely Specific Blog Title',
+    date: 'Oct 30th, 2019',
+    firstParagraph: `My placeholder text, I think, is going to end up being very good with women. I'm speaking with myself, number one, because I have a very good brain and I've said a lot of things. I was going to say something extremely rough to Lorem Ipsum, to its family, and I said to myself, "I can't do it. I just can't do it. It's inappropriate. It's not nice." You could see there was text coming out of her eyes, text coming out of her wherever.`,
+    secondParagraph: `After some time Dorian Gray looked up. "You have explained me to myself, Harry," he murmured with something of a sigh of relief. "I felt all that you have said, but somehow I was afraid of it, and I could not express it to myself. How well you know me! But we will not talk again of what has happened. It has been a marvellous experience. That is all. I wonder if life has still in store for me anything as marvellous."`,
+    thirdParagraph: `Waste of resources we just need to put these last issues to bed. All hands on deck moving the goalposts, so low engagement, when does this sunset? . Execute 4-blocker. Ladder up / ladder back to the strategy game-plan, but sea change, criticality for Bob called an all-hands this afternoon, so those options are already baked in with this model, and pivot. Drink the Kool-aid overcome key issues to meet key milestones. Open door policy big boy pants so price point, at the end of the day are we in agreeance strategic staircase this is our north star design. Gage [sic] where the industry is heading and give back to the community what we’ve learned. This vendor is incompetent run it up the flag pole canatics exploratory investigation data masking, bake it in nor not the long pole in my tent low hanging fruit.`
   }
 ];
 
@@ -101,6 +107,7 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
+
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
@@ -112,3 +119,46 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const fillArticle = document.querySelector('.articles');
+data.map(data => {
+  fillArticle.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph));
+});
+
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+  // define new elements
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articleParagraphOne = document.createElement('p');
+  const articleParagraphTwo = document.createElement('p');
+  const articleParagraphThree = document.createElement('p');
+  const articleButton = document.createElement('span');
+
+  //Setup Structure of elements
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(articleParagraphOne);
+  article.appendChild(articleParagraphTwo);
+  article.appendChild(articleParagraphThree);
+  article.appendChild(articleButton);
+
+  //set class names
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  articleButton.classList.add('expandButton');
+
+  //set text content
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articleParagraphOne.textContent = firstParagraph;
+  articleParagraphTwo.textContent = secondParagraph;
+  articleParagraphThree.textContent = thirdParagraph;
+  articleButton.textContent = 'Learn More';
+
+  // Event Listener
+  articleButton.addEventListener('click', (event) => {
+    article.classList.toggle('article-open')
+  });
+  return article;
+};
